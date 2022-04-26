@@ -14,6 +14,8 @@ import (
 	"log"
 )
 
+
+var serverPort *string
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
@@ -27,7 +29,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		http.HandleFunc("/clean",CleanServer)
-		http.ListenAndServe(":8090",nil)
+		http.ListenAndServe(*serverPort,nil)
 
 	},
 }
@@ -44,6 +46,7 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// serveCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	serverPort = serveCmd.Flags().StringP("port","p","8080","define the port on wich the server will listen")
 }
 
 func CleanServer(w http.ResponseWriter, req *http.Request){
