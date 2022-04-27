@@ -14,8 +14,8 @@ import (
 	"log"
 )
 
-
 var serverPort *string
+
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
@@ -29,10 +29,13 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		http.HandleFunc("/clean",CleanServer)
-		http.ListenAndServe(*serverPort,nil)
-
+		err := http.ListenAndServe(fmt.Sprintf(":"+ *serverPort),nil)
+		if err != nil {
+			fmt.Println(err)
+		}
 	},
 }
+
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
