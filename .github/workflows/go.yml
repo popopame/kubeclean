@@ -58,7 +58,7 @@ jobs:
 
     - name: Docker meta
       id: meta
-      uses: docker/metadata-action@v3
+      uses: docker/metadata-action@v3.7.0
       with:
         images: popopame/kubeclean
 
@@ -70,9 +70,9 @@ jobs:
 
     # Deploy to Docker registry
     - name: Deploy to Docker registry
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v2
       with:
-        context: . 
-        push: ${{ github.event_name != 'pull_request' }}      
+        context: .
+        push: true    
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
