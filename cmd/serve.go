@@ -6,12 +6,14 @@ package cmd
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 
 	"net/http"
 
-	"github.com/spf13/cobra"
 	"log"
+
+	"github.com/spf13/cobra"
 )
 
 var serverPort *string
@@ -61,5 +63,5 @@ func CleanServer(w http.ResponseWriter, req *http.Request){
 	if err!=nil {log.Fatal("request",err)}
 	
 	CleanManifestByteSlice := CleanManifest(manifest)
-	fmt.Println(string(CleanManifestByteSlice))
+	io.WriteString(w, string(CleanManifestByteSlice))
 }
