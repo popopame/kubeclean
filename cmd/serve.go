@@ -14,6 +14,7 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var serverPort *string
@@ -52,7 +53,10 @@ func init() {
 	// is called directly, e.g.:
 	// serveCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	serverPort = serveCmd.Flags().StringP("port","p","8080","define the port on wich the server will listen")
+
 }
+
+
 
 func CleanServer(w http.ResponseWriter, req *http.Request){
 	
